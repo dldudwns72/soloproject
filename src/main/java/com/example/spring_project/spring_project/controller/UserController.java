@@ -40,12 +40,14 @@ public class UserController {
 	public void update() {
 		Optional<UserModel> user = userRepository.findById(2L);
 				
-		user.ifPresent(selectUser ->{
-			selectUser.setName("JUN");
-			selectUser.setPhoneNumber("01012345678");
-
-			userRepository.save(selectUser);
-		});
+//		user.ifPresent(selectUser ->{
+//			selectUser.setName("JUN");
+//			selectUser.setPhoneNumber("01012345678");
+//
+//			userRepository.save(selectUser);
+//		});
+//		
+		
 	}
 	
 	@DeleteMapping("/deleteuser")
