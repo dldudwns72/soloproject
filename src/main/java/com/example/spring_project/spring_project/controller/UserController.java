@@ -33,25 +33,15 @@ public class UserController {
 	@PostMapping("/createuser")
 	public void create(@RequestBody UserModel userModel) {
 		userService.createUser(userModel);
-		
 	}
 	
 	@PutMapping("/modifyuser")
-	public void update() {
-		Optional<UserModel> user = userRepository.findById(2L);
-				
-//		user.ifPresent(selectUser ->{
-//			selectUser.setName("JUN");
-//			selectUser.setPhoneNumber("01012345678");
-//
-//			userRepository.save(selectUser);
-//		});
-//		
-		
+	public void update(@RequestBody UserModel userModel) {
+		userService.modifyUser(userModel);
 	}
 	
 	@DeleteMapping("/deleteuser")
-	public void delete() {
-		userRepository.deleteById(2L);
+	public void delete(@RequestBody UserModel userModel) {
+		userService.deleteUser(userModel.getId());
 	}
 }

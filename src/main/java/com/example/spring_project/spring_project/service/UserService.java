@@ -1,6 +1,7 @@
 package com.example.spring_project.spring_project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,23 @@ public class UserService implements UserServiceImpl {
 	public UserModel createUser(UserModel userModel) {
 		return userRepository.save(userModel);
 	}
+	
+	public UserModel modifyUser(UserModel userModel) {
+		Optional<UserModel> user = userRepository.findById(2L);
+		
+		user.ifPresent(selectUser ->{
+			selectUser.setName("JUN");
+			selectUser.setPhoneNumber("01012345678");
+			
+		});
+		
+		return userRepository.save(userModel);
+	}
+	
+	public String deleteUser(Long id) {
+		userRepository.deleteById(id);
+	    System.out.println("확인해보기:"+id);
+		return "삭제되었습니다";
+	}
+	
 }
