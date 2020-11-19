@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.spring_project.spring_project.model.UserModel;
 import com.example.spring_project.spring_project.repository.UserRepository;
@@ -25,16 +24,17 @@ public class UserService implements UserServiceImpl {
 		return userRepository.save(userModel);
 	}
 	
-	public UserModel modifyUser(UserModel userModel) {
-		Optional<UserModel> user = userRepository.findById(2L);
+	public void modifyUser(Long id) {
+		Optional<UserModel> user = userRepository.findById(4L);
+			
 		
 		user.ifPresent(selectUser ->{
 			selectUser.setName("JUN");
 			selectUser.setPhoneNumber("01012345678");
-			
+
+			 userRepository.save(selectUser);
 		});
 		
-		return userRepository.save(userModel);
 	}
 	
 	public String deleteUser(Long id) {

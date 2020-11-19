@@ -10,7 +10,7 @@ public interface UserServiceImpl {
 	
 	public UserModel createUser(UserModel userModel);
 	
-	public UserModel modifyUser(UserModel userModel);
+	public void modifyUser(Long id);
 	
 	public String deleteUser(Long id);
 
