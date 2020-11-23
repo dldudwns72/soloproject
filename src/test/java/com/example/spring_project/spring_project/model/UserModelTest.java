@@ -17,7 +17,7 @@ import lombok.Setter;
 @Table(name="user") 
 @AllArgsConstructor
 @Entity
-public class UserModel {
+public class UserModelTest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

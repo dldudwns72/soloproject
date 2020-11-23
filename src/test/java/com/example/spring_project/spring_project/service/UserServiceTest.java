@@ -6,26 +6,29 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.spring_project.spring_project.model.UserModel;
-import com.example.spring_project.spring_project.repository.UserRepository;
-import com.example.spring_project.spring_project.service.impl.UserServiceImpl;
+import com.example.spring_project.spring_project.model.UserModelTest;
+import com.example.spring_project.spring_project.repository.UserRepositoryTest;
+import com.example.spring_project.spring_project.service.impl.UserServiceImplTest;
 
 @Service
-public class UserService implements UserServiceImpl{
+public class UserServiceTest implements UserServiceImplTest {
 	
 	@Autowired
-	UserRepository userRepository;
+	UserRepositoryTest userRepository;
 	
-	public List<UserModel> getUser(){
+	public List<UserModelTest> getUser(){
 		return userRepository.findAll();
 	}
 	
-	public UserModel createUser(UserModel userModel) {
+	public UserModelTest createUser(UserModelTest userModel) {
+		userModel.setName("kkkkk");
+		userModel.setPhoneNumber("12312312412412412a");
+		
 		return userRepository.save(userModel);
 	}
 	
 	public void modifyUser(Long id) {
-		Optional<UserModel> user = userRepository.findById(4L);
+		Optional<UserModelTest> user = userRepository.findById(1L);
 			
 		
 		user.ifPresent(selectUser ->{
