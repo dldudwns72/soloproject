@@ -10,12 +10,14 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
 // class이름고 DB Table이름이 같으면 뒤에 name 선언하지 않아도 됨
 @Table(name="user") 
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class UserModel {
 	@Id

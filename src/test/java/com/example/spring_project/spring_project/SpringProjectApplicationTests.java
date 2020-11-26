@@ -18,13 +18,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.spring_project.spring_project.model.UserModelTest;
 import com.example.spring_project.spring_project.repository.UserRepositoryTest;
 
-@ExtendWith(SpringExtension.class) 
+//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class SpringProjectApplicationTests {
 	
 	@Autowired
 	UserRepositoryTest userRepository;
 	
+	@Autowired
+	UserModelTest userModelTest1;
 	
 	@Test
 	void contextLoads() {
@@ -39,7 +41,8 @@ class SpringProjectApplicationTests {
 	
 	@Test
 	@DisplayName("User정보 GET")
-	List<UserModelTest> getUser() {
+	public List<UserModelTest> getUser() {
+		System.out.println("!@#!@#");
 		return userRepository.findAll();
 	}
 	
