@@ -43,10 +43,10 @@ public class UserTests {
 		List<UserModelTest> userModelTest = userRepositorytest.findAll();
 		userModelTest.get(0).getName();
 		// 첫번째 userModelTest의 이름이 "lee" 와 같으면 테스트 통과
-		assertEquals("lee", userModelTest.get(0).getName());
+//		assertEquals("lee", userModelTest.get(0).getName());
 
-		// userModelTest의 size가 2이면 통과
-		assertEquals(2, userModelTest.size());
+		// userModelTest의 size가 2이면 통과 , 세번째 파라미터는 오류 메세지를 보여준다
+		assertEquals(5, userModelTest.size(),"사이즈가 맞지 않다");
 	}
 
 	@Test
