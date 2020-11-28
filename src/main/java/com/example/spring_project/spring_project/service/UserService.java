@@ -18,11 +18,17 @@ public class UserService implements UserServiceImpl{
 	
 	
 	
-	public List<UserModel> getUser(){
+	public List<UserModel> getUsers(){
 		System.out.println("userRepository.findAll()" + userRepository.findAll());
 		return userRepository.findAll();
 	}
+
+	@Override
+	public Optional<UserModel> getUser() {
+		return userRepository.findById(1L);
+	}
 	
+
 	public UserModel createUser(UserModel userModel) {
 		return userRepository.save(userModel);
 	}
@@ -45,5 +51,15 @@ public class UserService implements UserServiceImpl{
 	    System.out.println("확인해보기:"+id);
 		return "삭제되었습니다";
 	}
+
+
+
+
+
+
+
+
+
+
 	
 }

@@ -26,8 +26,13 @@ public class UserController {
 	
 	
 	
+	@GetMapping("/getusers")
+	public List<UserModel> getUsers() {
+		return userService.getUsers();
+	}
+	
 	@GetMapping("/getuser")
-	public List<UserModel> getUser() {
+	public Optional<UserModel> getUser(){
 		return userService.getUser();
 	}
 	
