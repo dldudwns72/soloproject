@@ -1,6 +1,7 @@
 package com.example.spring_project.spring_project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.List;
 
@@ -10,23 +11,26 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.example.spring_project.spring_project.model.UserModelTest;
-import com.example.spring_project.spring_project.repository.UserRepositoryTest;
+import com.example.spring_project.spring_project.controller.UserController;
+import com.example.spring_project.spring_project.model.UserModel;
+import com.example.spring_project.spring_project.repository.UserRepository;
 
 //@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class SpringProjectApplicationTests {
 	
-	@Autowired
-	UserRepositoryTest userRepository;
 	
 	@Autowired
-	UserModelTest userModelTest1;
+	UserRepository userRepository;
+	
+	@Autowired
+	UserModel userModel;
 	
 	@Test
 	void contextLoads() {
@@ -41,10 +45,11 @@ class SpringProjectApplicationTests {
 	
 	@Test
 	@DisplayName("User정보 GET")
-	public List<UserModelTest> getUser() {
+	public List<UserModel> getUser() {
 		System.out.println("!@#!@#");
 		return userRepository.findAll();
 	}
+	
 	
 	
 //  JUnit5 라이프 사이클
