@@ -30,6 +30,17 @@ public class UserModel {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
+	public UserModel(String name,String phoneNumber) {
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public UserModel(Long id) {
+		this.id = id;
+	}
+
+	
+	
 	
 	
 }
