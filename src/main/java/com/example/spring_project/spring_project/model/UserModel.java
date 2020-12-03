@@ -1,5 +1,7 @@
 package com.example.spring_project.spring_project.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +32,19 @@ public class UserModel {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	public UserModel(String name,String phoneNumber) {
+	@Column
+	private LocalDateTime createDate;
+	
+	// 만들어질때 순서 확인해보기 -> 단순히 정할 수 없으며 따로 알고리즘을 작성하여 해야한다
+	@Column
+	private boolean isUser;
+	
+	
+	public UserModel(String name,String phoneNumber,LocalDateTime createDate,boolean isUser) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+		this.createDate = createDate;
+		this.isUser = isUser;
 	}
 	
 	public UserModel(Long id) {

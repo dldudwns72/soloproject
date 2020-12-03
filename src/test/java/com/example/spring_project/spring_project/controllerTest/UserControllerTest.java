@@ -9,6 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -57,7 +60,7 @@ public class UserControllerTest extends AbstractControllerTest {
 	@DisplayName("User 생성")
 	public void createUser() throws Exception {
 		// {"id":null,"name":"kkk","phoneNumber":"2323"}
-		String content = objectMapper.writeValueAsString(new UserModel("kkk2", "23223"));
+		String content = objectMapper.writeValueAsString(new UserModel("lee", "01054915786", LocalDateTime.now(),false));
 		logger.info("content 내용 " + content);
 
 		mockMvc.perform(post("/createuser").content(content).contentType(MediaType.APPLICATION_JSON)
