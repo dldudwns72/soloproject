@@ -13,11 +13,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "board")
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "board")
 public class BoardModel {
 	
 	@Id
@@ -33,7 +33,7 @@ public class BoardModel {
 	@Column
 	private String register;
 	
-	@Column
+	@Column(name = "create_time")
 	private LocalDateTime createTime;
 	
 	

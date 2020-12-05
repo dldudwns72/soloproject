@@ -8,11 +8,12 @@ public interface BoardServiceImpl {
 	
 	public BoardModel getBoard();
 	
-	public BoardModel createBoard(BoardModel boardModel);
+	public String createBoard(BoardModel boardModel);
 	
-	public String deleteBoard();
 	
-	public String modifyBoard();
-	
+//	public String deleteBoard();
+//	
+	public BoardModel modifyBoard(BoardModel boardModel);
+//	
 	
 }

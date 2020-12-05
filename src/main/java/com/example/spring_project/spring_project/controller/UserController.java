@@ -19,9 +19,6 @@ import com.example.spring_project.spring_project.service.UserService;
 public class UserController {
 	
 	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
 	UserService userService;
 	
 	
