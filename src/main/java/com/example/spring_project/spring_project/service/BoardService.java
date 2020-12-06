@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.spring_project.spring_project.model.BoardModel;
 import com.example.spring_project.spring_project.repository.BoardRepository;
 import com.example.spring_project.spring_project.service.impl.BoardServiceImpl;
-import com.sun.el.stream.Optional;
+import java.util.Optional;
 
 @Service
 public class BoardService implements BoardServiceImpl {
@@ -26,8 +26,9 @@ public class BoardService implements BoardServiceImpl {
 	}
 
 	@Override
-	public BoardModel getBoard() {
-		return boardRepository.getOne(2);
+	public Optional<BoardModel> getBoard(int no) {
+		return boardRepository.findById(no);
+//		return boardRepository.getOne(no);
 	}
 
 	@Override

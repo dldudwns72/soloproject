@@ -2,6 +2,7 @@ package com.example.spring_project.spring_project.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,9 @@ public class BoardController {
 		return boardService.getBoards();
 	}
 	
-	@GetMapping("/getboard")
-	public BoardModel getBoard(@PathVariable int no) {
-		return boardService.getBoard();
+	@GetMapping("/getboard/{no}")
+	public Optional<BoardModel> getBoard(@PathVariable(name = "no") int  no) {
+		return boardService.getBoard(no);
 	}
 	
 	@PostMapping("/createboard")

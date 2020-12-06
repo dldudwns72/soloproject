@@ -44,7 +44,7 @@ public class BoardControllerTest extends AbstractControllerTest {
 	@Test
 	@DisplayName("Board 정보")
 	public void getBoard() throws Exception {
-		mockMvc.perform(get("/getboard",2));
+		mockMvc.perform(get("/getboard/2"));
 	}
 
 	@Test
