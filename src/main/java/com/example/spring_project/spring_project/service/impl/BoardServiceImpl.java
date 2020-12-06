@@ -11,9 +11,8 @@ public interface BoardServiceImpl {
 	
 	public String createBoard(BoardModel boardModel);
 	
+	public String deleteBoard(int no);
 	
-//	public String deleteBoard();
-//	
 	public BoardModel modifyBoard(BoardModel boardModel);
 //	
 	

@@ -1,5 +1,6 @@
 package com.example.spring_project.spring_project.controllerTest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -61,10 +62,16 @@ public class BoardControllerTest extends AbstractControllerTest {
 	@Test
 	@DisplayName("게시판 수정")
 	public void modifyBoard() throws Exception {
-		String content = objectMapper.writeValueAsString(new BoardModel(2, "수정제목", "수정내용", "yjlee수정", LocalDateTime.now()));
+		String content = objectMapper.writeValueAsString(new BoardModel(4, "수정제목", "수정내용", "yjlee수정", LocalDateTime.now()));
 
 		mockMvc.perform(put("/modifyboard").content(content).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
+	}
+	
+	@Test
+	@DisplayName("ID로 게시판 삭제")
+	public void deleteBoard() throws Exception {
+		mockMvc.perform(delete("/deleteboard/2"));
 	}
 
 }

@@ -47,20 +47,29 @@ public class BoardService implements BoardServiceImpl {
 	@Override
 	public BoardModel modifyBoard(BoardModel boardModel) {
 		
-		BoardModel board = boardRepository.getOne(1);
+		Optional<BoardModel> board = boardRepository.findById(boardModel.getNo());
 		
 		logger.info("ID를 가져온 BoardModel " + board);
+		board.ifPresent(data ->{
+			data.setNo(boardModel.getNo());
+			data.setTitle(boardModel.getTitle());
+			data.setContent(boardModel.getContent());
+			data.setRegister("LEEYOUNGJUN");
+			data.setCreateTime(LocalDateTime.now());
+
+			boardRepository.save(data);
 		
-		board.setNo(boardModel.getNo());
-		board.setTitle(boardModel.getTitle());
-		board.setContent(boardModel.getContent());
-		board.setRegister(boardModel.getRegister());
-		board.setCreateTime(boardModel.getCreateTime());
-		
-		boardRepository.save(board);
+			
+		});
 		
 		return boardModel;
 		
+	}
+	
+	@Override
+	public String deleteBoard(int no) {
+		boardRepository.deleteById(no);
+		return "삭제 완료하였습니다";
 	}
 
 }
