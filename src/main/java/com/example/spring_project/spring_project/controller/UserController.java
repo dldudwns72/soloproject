@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,9 +28,9 @@ public class UserController {
 		return userService.getUsers();
 	}
 	
-	@GetMapping("/getuser")
-	public Optional<UserModel> getUser(){
-		return userService.getUser();
+	@GetMapping("/getuser/{userId}")
+	public Optional<UserModel> getUser(@PathVariable(name = "userId") int userId){
+		return userService.getUser(userId);
 	}
 	
 	@PostMapping("/createuser")
@@ -39,11 +40,11 @@ public class UserController {
 	
 	@PutMapping("/modifyuser")
 	public void update(@RequestBody UserModel userModel) {
-		userService.modifyUser(userModel.getId());
+		userService.modifyUser(userModel.getUserId());
 	}
 	
 	@DeleteMapping("/deleteuser")
 	public void delete(@RequestBody UserModel userModel) {
-		userService.deleteUser(userModel.getId());
+		userService.deleteUser(userModel.getUserId());
 	}
 }

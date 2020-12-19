@@ -20,11 +20,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import com.example.spring_project.spring_project.controller.UserController;
+import com.example.spring_project.spring_project.model.BoardModel;
 import com.example.spring_project.spring_project.model.UserModel;
+import com.example.spring_project.spring_project.repository.BoardRepository;
 import com.example.spring_project.spring_project.repository.UserRepository;
 import com.example.spring_project.spring_project.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.el.stream.Optional;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 public class UserControllerTest extends AbstractControllerTest {
 
@@ -38,6 +42,10 @@ public class UserControllerTest extends AbstractControllerTest {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
 
 	@Override
 	protected Object controller() {
@@ -52,15 +60,29 @@ public class UserControllerTest extends AbstractControllerTest {
 
 	@Test
 	@DisplayName("User 정보 가져오기")
+	//@Transactional // 데이터 되돌리기 
 	public void getUser() throws Exception {
-		mockMvc.perform(get("/getuser", 1L));
+//
+//		Optional<UserModel> user = userRepository.findById(1L);
+//
+//		user.ifPresent(selectUser -> {
+//			selectUser.getBoardModelList().stream().forEach(detail -> {
+//				
+//			});
+//		});
+		Long data = 2L;
+		int data2 = data.intValue(); // Long형을 Int 형으로 변환
+
+		mockMvc.perform(get("/getuser/2"));
 	}
 
 	@Test
 	@DisplayName("User 생성")
 	public void createUser() throws Exception {
-		// {"id":null,"name":"kkk","phoneNumber":"2323"}
-		String content = objectMapper.writeValueAsString(new UserModel("lee", "01054915786", LocalDateTime.now(),false));
+		
+		
+		String content = objectMapper
+				.writeValueAsString(new UserModel("yjlee", "6432151", LocalDateTime.now(), true,boardRepository.findAll()));
 		logger.info("content 내용 " + content);
 
 		mockMvc.perform(post("/createuser").content(content).contentType(MediaType.APPLICATION_JSON)
@@ -72,26 +94,20 @@ public class UserControllerTest extends AbstractControllerTest {
 	public void modifyUser() throws Exception {
 //		String content = objectMapper.writeValueAsString(userRepository.findById(10L));
 		String content = objectMapper.writeValueAsString(new UserModel(10L));
-		
-		mockMvc.perform(put("/modifyuser")
-				.content(content)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
-		
+
+		mockMvc.perform(put("/modifyuser").content(content).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+
 	}
 
 	@Test
 	@DisplayName("User 삭제")
 	public void deleteUser() throws Exception {
-		
+
 		String content = objectMapper.writeValueAsString(userRepository.findById(5L));
-		
-		mockMvc.perform(delete("/deleteuser")
-					.content(content)
-					.contentType(MediaType.APPLICATION_JSON)
-    				.accept(MediaType.APPLICATION_JSON))
-					.andExpect(status().isOk());
+
+		mockMvc.perform(delete("/deleteuser").content(content).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	// 참고 https://gofnrk.tistory.com/74 , https://shinsunyoung.tistory.com/52

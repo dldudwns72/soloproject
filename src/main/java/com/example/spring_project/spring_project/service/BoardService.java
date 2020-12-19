@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spring_project.spring_project.model.BoardModel;
+import com.example.spring_project.spring_project.model.UserModel;
 import com.example.spring_project.spring_project.repository.BoardRepository;
 import com.example.spring_project.spring_project.service.impl.BoardServiceImpl;
 import java.util.Optional;
@@ -27,6 +28,8 @@ public class BoardService implements BoardServiceImpl {
 
 	@Override
 	public Optional<BoardModel> getBoard(int no) {
+//		BoardModel boardModel = boardRepository.findById(no).orElse(null);
+		
 		return boardRepository.findById(no);
 //		return boardRepository.getOne(no);
 	}
@@ -34,12 +37,12 @@ public class BoardService implements BoardServiceImpl {
 	@Override
 	public String createBoard(BoardModel boardModel) {
 		BoardModel board = new BoardModel();
-		board.setNo(boardModel.getNo());
+		board.setBoardNo(boardModel.getBoardNo());
 		board.setTitle(boardModel.getTitle());
 		board.setContent(boardModel.getContent());
 		board.setCreateTime(boardModel.getCreateTime());
 		board.setRegister(boardModel.getRegister());
-
+		
 		boardRepository.save(board);
 		return boardModel.getTitle();
 	}
@@ -47,15 +50,15 @@ public class BoardService implements BoardServiceImpl {
 	@Override
 	public BoardModel modifyBoard(BoardModel boardModel) {
 		
-		Optional<BoardModel> board = boardRepository.findById(boardModel.getNo());
+		Optional<BoardModel> board = boardRepository.findById(boardModel.getBoardNo());
 		
 		logger.info("ID를 가져온 BoardModel " + board);
 		board.ifPresent(data ->{
-			data.setNo(boardModel.getNo());
+			data.setBoardNo(boardModel.getBoardNo());
 			data.setTitle(boardModel.getTitle());
 			data.setContent(boardModel.getContent());
-			data.setRegister("LEEYOUNGJUN");
-			data.setCreateTime(LocalDateTime.now());
+			data.setModifier(boardModel.getModifier());
+			data.setModifyTime(LocalDateTime.now());
 
 			boardRepository.save(data);
 		
