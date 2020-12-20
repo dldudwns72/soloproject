@@ -43,10 +43,7 @@ public class UserControllerTest extends AbstractControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private BoardRepository boardRepository;
 	
-
 	@Override
 	protected Object controller() {
 		return userController;
@@ -70,8 +67,6 @@ public class UserControllerTest extends AbstractControllerTest {
 //				
 //			});
 //		});
-		Long data = 2L;
-		int data2 = data.intValue(); // Long형을 Int 형으로 변환
 
 		mockMvc.perform(get("/getuser/2"));
 	}
@@ -79,10 +74,14 @@ public class UserControllerTest extends AbstractControllerTest {
 	@Test
 	@DisplayName("User 생성")
 	public void createUser() throws Exception {
-		
+
+//		String content = objectMapper
+//				.writeValueAsString(new UserModel("yjlee", "6432151", LocalDateTime.now(), true));
 		
 		String content = objectMapper
-				.writeValueAsString(new UserModel("yjlee", "6432151", LocalDateTime.now(), true,boardRepository.findAll()));
+				.writeValueAsString(UserModel.builder().name("joo").phoneNumber("987").createDate(LocalDateTime.now()).isUser(false).build());
+		
+		
 		logger.info("content 내용 " + content);
 
 		mockMvc.perform(post("/createuser").content(content).contentType(MediaType.APPLICATION_JSON)
@@ -92,7 +91,6 @@ public class UserControllerTest extends AbstractControllerTest {
 	@Test
 	@DisplayName("User 수정")
 	public void modifyUser() throws Exception {
-//		String content = objectMapper.writeValueAsString(userRepository.findById(10L));
 		String content = objectMapper.writeValueAsString(new UserModel(10L));
 
 		mockMvc.perform(put("/modifyuser").content(content).contentType(MediaType.APPLICATION_JSON)

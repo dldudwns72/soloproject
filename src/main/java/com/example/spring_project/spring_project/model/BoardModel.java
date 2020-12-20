@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,17 +60,18 @@ public class BoardModel {
 		this.modifyTime = modifyTime;
 	}
 	
-	public BoardModel(String title,String content,String register,LocalDateTime createTime) {
+	public BoardModel(String title,String content,String register,LocalDateTime createTime,UserModel user) {
 		this.title = title;
 		this.content= content;
 		this.register = register;
 		this.createTime = createTime;
+		this.user = user;
 	}
 
 	
 	// N : 1
-	@ManyToOne
+	@ManyToOne(optional = true, fetch = FetchType.LAZY) // optional 기본값 true 일때 userId가 없어도 조회가 되야하므로 Outer Join, false일 경우 반대
 	@JoinColumn(name = "userId")
-	private UserModel user; //디비 칼럼에 user_id로 들어감, 실제로는 변수명의_id 형태로 들어가는 것이다 
+	private UserModel user; //디비 칼럼에 user_id로 들어감, 실제로는 변수명의_id 형태로 들어가는 것이다, MUL로 들어가는이유?
 	
 }

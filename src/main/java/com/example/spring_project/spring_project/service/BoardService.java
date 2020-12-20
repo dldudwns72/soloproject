@@ -42,6 +42,7 @@ public class BoardService implements BoardServiceImpl {
 		board.setContent(boardModel.getContent());
 		board.setCreateTime(boardModel.getCreateTime());
 		board.setRegister(boardModel.getRegister());
+		board.setUser(boardModel.getUser());
 		
 		boardRepository.save(board);
 		return boardModel.getTitle();

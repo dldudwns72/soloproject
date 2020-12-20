@@ -1,6 +1,5 @@
 package com.example.spring_project.spring_project.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,43 +26,18 @@ public class UserService implements UserServiceImpl {
 	
 
 	public List<UserModel> getUsers() {
-//		logger.trace("trace");
-//		logger.debug("debug");
-//        logger.warn("warn");
-//        logger.error("error");
-		// 참고 :
-		// https://hochoon-dev.tistory.com/entry/JAVA-Logback-%EC%82%AC%EC%9A%A9%EB%B2%95
-
 		logger.info("UserModel" + userRepository.findAll());
+		
 		return userRepository.findAll();
 	}
 
 	@Override
 	public Optional<UserModel> getUser(int userId) {
 
-		Optional<UserModel> user = userRepository.findById((long)userId);
-
-		user.ifPresent(selectUser -> {
-//			selectUser.getBoardModelList().stream().forEach(detail -> {
-//				
-//			});
-			selectUser.setBoardModelList(boardRepository.findByRegister(selectUser.getName()));
-			logger.info("findByRegister" + boardRepository.findByRegister(selectUser.getName()));
-		});
-
-		
-//		return userRepository.findById(1L);
-
-		return user;
+		return userRepository.findById((long)userId);
 	}
 
 	public UserModel createUser(UserModel userModel) {
-		
-//		UserModel user = new UserModel();
-//		user.setName("LeeYoungJun");
-//		user.setPhoneNumber("01054915786");
-//		user.setCreateDate(LocalDateTime.now());
-//		user.setUser(false);
 		
 		return userRepository.save(userModel);
 

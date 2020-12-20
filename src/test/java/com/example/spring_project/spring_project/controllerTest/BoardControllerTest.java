@@ -32,6 +32,9 @@ public class BoardControllerTest extends AbstractControllerTest {
 
 	@Autowired
 	private BoardController boardController;
+	
+	@Autowired
+	private UserRepository  userRepoistory;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -56,13 +59,12 @@ public class BoardControllerTest extends AbstractControllerTest {
 	@Test
 	@DisplayName("게시판 생성")
 	public void createBoards() throws Exception {
-		BoardModel boardModel = new BoardModel("제목2", "내용2", "yjlee", LocalDateTime.now());
+		UserModel user = userRepoistory.findByName("joo");
+
+		BoardModel boardModel = new BoardModel("제목44", "내용44", "yjlee", LocalDateTime.now(),user);
 		
 		
 		String content = objectMapper.writeValueAsString(boardModel);
-
-		logger.info("객체 JSON화 " + content);
-		
 		
 		mockMvc.perform(post("/createboard").content(content).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());

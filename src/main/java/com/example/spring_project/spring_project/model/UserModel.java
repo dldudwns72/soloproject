@@ -17,8 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 // class이름고 DB Table이름이 같으면 뒤에 name 선언하지 않아도 됨
@@ -26,6 +28,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+//@ToString(exclude = {"boardModelList"}) // ToString시 제외 할 변수 
 public class UserModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,12 +48,11 @@ public class UserModel {
 	@Column
 	private boolean isUser;
 
-	public UserModel(String name, String phoneNumber, LocalDateTime createDate, boolean isUser, List<BoardModel> boardModelList ) {
+	public UserModel(String name, String phoneNumber, LocalDateTime createDate, boolean isUser ) {
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.createDate = createDate;
 		this.isUser = isUser;
-		this.boardModelList = boardModelList;
 	}
 
 	public UserModel(Long userId) {
@@ -59,7 +62,7 @@ public class UserModel {
 
 	// 본인을 기준으로 N:M 기준 설정, 앞이 본인
 	// 1:N mappedBy = "ManyToOne 에서 선언한 변수 명 "
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // mappedBy로 user과 연관이 있는 것을 알려준다.
-	private List<BoardModel> boardModelList;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user") // mappedBy로 user과 연관이 있는 것을 알려준다.
+//	private List<BoardModel> boardModelList;
 
 }

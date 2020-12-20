@@ -23,8 +23,6 @@ public class BoardController {
 	
 	private static Logger logger = LoggerFactory.getLogger(BoardService.class);
 	 
-	
-	
 	@Autowired
 	BoardService boardService;
 	
