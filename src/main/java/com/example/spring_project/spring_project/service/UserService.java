@@ -1,5 +1,6 @@
 package com.example.spring_project.spring_project.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,7 @@ public class UserService implements UserServiceImpl {
 	}
 
 	public UserModel createUser(UserModel userModel) {
+		userModel.setCreateDate(LocalDateTime.now());
 		
 		return userRepository.save(userModel);
 
